@@ -224,6 +224,7 @@ public class MyGame extends Game  {
                                         p.eating = true;
                                 }
                         }
+                }
                 
         }
 
