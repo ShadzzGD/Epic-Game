@@ -30,7 +30,6 @@ public class MyGame extends Game  {
 
         // booleans
         boolean canInteract;
-        boolean canCollect;
 		
 	public MyGame() {
                 // initialize variables
@@ -74,11 +73,11 @@ public class MyGame extends Game  {
 
                 p.barrierCheck(SCREEN_WIDTH, SCREEN_HEIGHT);
                 p.naturalDrain();
-                for (int i = 0; i < r.length; i++) {
-                        r[i].collisionCheck(p);
+                for (Rock r1 : r) {
+                    r1.collisionCheck(p);
                 }
-                for (int l = 0; l < t.length; l++) {
-                        t[l].collisionCheck(p);
+                for (Tree t1 : t) {
+                    t1.collisionCheck(p);
                 }
 
                 // awesome progress bar for everything interactive
@@ -115,11 +114,11 @@ public class MyGame extends Game  {
                 pa.barrierCheck(SCREEN_WIDTH, SCREEN_HEIGHT);
                 pa.movementAI(random);
                 pa.collision(p);
-                for (int o = 0; o < t.length; o++) {
-                        t[o].animalCollision(pa);
+                for (Tree t1 : t) {
+                    t1.animalCollision(pa);
                 }
-                for (int p = 0; p < r.length; p++) {
-                        r[p].animalCollision(pa);
+                for (Rock r1 : r) {
+                    r1.animalCollision(pa);
                 }
 
                 if (pa.anotherWidthVar == 0) {
@@ -144,13 +143,13 @@ public class MyGame extends Game  {
 
                 // draw game
                 // draw blocks
-                for (int j = 0; j < r.length; j++) {
-                        r[j].draw(pen);
+                for (Rock r1 : r) {
+                    r1.draw(pen);
                 }
 
                 // draw trees
-                for (int k = 0; k < t.length; k++) {
-                        t[k].draw(pen);
+                for (Tree t1 : t) {
+                    t1.draw(pen);
                 }
 
                 // check if the player is alive 
@@ -211,11 +210,11 @@ public class MyGame extends Game  {
                                 p.right();
                                 p.energy -= 1;
                         } else if (ke.getKeyChar() == 'e' && canInteract == true) {
-                                for (int m = 0; m < t.length; m++) {
-                                        t[m].checkForInteraction(p);
+                                for (Tree t1 : t) {
+                                    t1.checkForInteraction(p);
                                 }
-                                for (int n = 0; n < r.length; n++) {
-                                        r[n].checkForInteraction(p);
+                                for (Rock r1 : r) {
+                                    r1.checkForInteraction(p);
                                 }
                                 pa.checkForInteraction(p);
                         } else if (ke.getKeyChar() == 'c') {

@@ -1,13 +1,13 @@
 // imports
-import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.Graphics;
 
 public class Tree {
 
     // instance variables
-    private int x, y;
-    private int dim;
-    private Color c;
+    private final int x, y;
+    private final int dim;
+    private final Color c;
 
     // constructors
     public Tree(int tx, int ty, int tdim, Color tc) {
@@ -47,14 +47,13 @@ public class Tree {
     // aimal collision
     public void animalCollision(PassiveAnimal pa) {
         if (pa.x == x && pa.y == y) {
-            if (pa.dir == "left") {
-                pa.x += pa.dim;
-            } else if (pa.dir == "right") {
-                pa.x -= pa.dim;
-            } else if (pa.dir == "up") {
-                pa.y += pa.dim;
-            } else if (pa.dir == "down") {
-                pa.y -= pa.dim;
+            if (null != pa.dir) switch (pa.dir) {
+                case "left" -> pa.x += pa.dim;
+                case "right" -> pa.x -= pa.dim;
+                case "up" -> pa.y += pa.dim;
+                case "down" -> pa.y -= pa.dim;
+                default -> {
+                }
             }
         }
     }
@@ -62,14 +61,13 @@ public class Tree {
     // collision
     public void collisionCheck(Player p) {
         if (p.x == x && p.y == y) {
-            if (p.dir == "left") {
-                p.x += p.dim;
-            } else if (p.dir == "right") {
-                p.x -= p.dim;
-            } else if (p.dir == "up") {
-                p.y += p.dim;
-            } else if (p.dir == "down") {
-                p.y -= p.dim;
+            if (null != p.dir) switch (p.dir) {
+                case "left" -> p.x += p.dim;
+                case "right" -> p.x -= p.dim;
+                case "up" -> p.y += p.dim;
+                case "down" -> p.y -= p.dim;
+                default -> {
+                }
             }
         }
     }

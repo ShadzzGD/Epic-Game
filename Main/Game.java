@@ -9,13 +9,11 @@ public abstract class Game implements KeyListener, MouseListener
 {
     private JFrame frame;
     private GamePanel gamePanel;
-    boolean running;
     private MyGame game;    
 
     protected void start(String title, int width, int height)
     {
     	this.game = (MyGame)this;
-    	running = true;
         frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gamePanel = new GamePanel();

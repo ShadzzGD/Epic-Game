@@ -1,6 +1,6 @@
 // imports
-import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.Random;
 
 public class PassiveAnimal {
@@ -36,21 +36,28 @@ public class PassiveAnimal {
         if (randomNum > movement) {
             anotherRandomNum = rand.nextInt(5);
             // up
-            if (anotherRandomNum == 1) {
-                y -= dim;
-                dir = "up";
-            // left
-            } else if (anotherRandomNum == 2) {
-                x -= dim;
-                dir = "left";
-            // down
-            } else if (anotherRandomNum == 3) {
-                y += dim;
-                dir = "down";
-            // right
-            } else if (anotherRandomNum == 4) {
-                x += dim;
-                dir = "right";
+            switch (anotherRandomNum) {
+                case 1 -> {
+                    y -= dim;
+                    dir = "up";
+                    // left
+                }
+                case 2 -> {
+                    x -= dim;
+                    dir = "left";
+                    // down
+                }
+                case 3 -> {
+                    y += dim;
+                    dir = "down";
+                    // right
+                }
+                case 4 -> {
+                    x += dim;
+                    dir = "right";
+                }
+                default -> {
+                }
             }
         }
     }
@@ -95,14 +102,13 @@ public class PassiveAnimal {
         // player collision
         if (alive == true) {
             if (p.x == x && p.y == y) {
-                if (p.dir == "left") {
-                    p.x += p.dim;
-                } else if (p.dir == "right") {
-                    p.x -= p.dim;
-                } else if (p.dir == "up") {
-                    p.y += p.dim;
-                } else if (p.dir == "down") {
-                    p.y -= p.dim;
+                if (null != p.dir) switch (p.dir) {
+                    case "left" -> p.x += p.dim;
+                    case "right" -> p.x -= p.dim;
+                    case "up" -> p.y += p.dim;
+                    case "down" -> p.y -= p.dim;
+                    default -> {
+                    }
                 }
             }
         }
