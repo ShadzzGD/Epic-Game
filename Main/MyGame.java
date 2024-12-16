@@ -22,11 +22,14 @@ public class MyGame extends Game  {
         Rock[] r;
         PassiveAnimal pa;
         Color maroon;
+        Color darkerMaroon;
         Color brown;
         Random random;
 
         // integers
         int pWidth;
+        int selectorX, selectorY;
+        int selected;
 
         // booleans
         boolean canInteract;
@@ -40,6 +43,7 @@ public class MyGame extends Game  {
                 // color
                 maroon = new Color(128, 0, 0);
                 brown = new Color(150, 75, 0);
+                darkerMaroon = new Color(150, 0, 0);
 
                 // player
                 p = new Player(100, 200, 25, 25, Color.ORANGE);
@@ -64,9 +68,12 @@ public class MyGame extends Game  {
 
                 // integers
                 pWidth = 0;
+                selectorX = 100;
+                selectorY = 380;
 
                 // booleans
                 canInteract = true;
+                selected = 1;
         }
 
 	public void update() {
@@ -152,6 +159,13 @@ public class MyGame extends Game  {
                     t1.draw(pen);
                 }
 
+                // draw passive animal
+                if (pa.alive == true) {
+                        pa.draw(pen);
+                        pa.drawProgressBar(pen);
+                        pa.drawSecondOne(pen);
+                }
+
                 // check if the player is alive 
                 if (p.alive == true) {
                         // draw player
@@ -161,13 +175,6 @@ public class MyGame extends Game  {
                                 p.drawProgressBar(pen);
                                 p.drawSecondOne(pen, pWidth);
                         }
-                }
-
-                // draw passive animal
-                if (pa.alive == true) {
-                        pa.draw(pen);
-                        pa.drawProgressBar(pen);
-                        pa.drawSecondOne(pen);
                 }
 
                 // draw death screen
@@ -183,6 +190,17 @@ public class MyGame extends Game  {
                 pen.drawString("Meat: " + Integer.toString(p.meat), 0, 450);
                 pen.drawString(Integer.toString(p.food) + " :Hunger", 375, 400);
                 pen.drawString(Integer.toString(p.energy) + " :Energy", 375, 425);
+                // draw hot bar
+                pen.setColor(darkerMaroon);
+                pen.fillRect(100, 380, 85, 75);
+                pen.fillRect(190, 380, 85, 75);
+                pen.fillRect(280, 380, 85, 75);
+                // draw selector
+                pen.setColor(Color.WHITE);
+                pen.drawRect(selectorX, selectorY, 85, 75);
+                // draw items
+                pen.setFont(new Font("Arial", 1, 15));
+                pen.drawString("Dagger", 115, 420);
         }
         
     @Override
@@ -225,6 +243,15 @@ public class MyGame extends Game  {
                         }
                 }
                 
+        }
+
+        // selector movement
+        if (ke.getKeyCode() == KeyEvent.VK_RIGHT && selectorX < 280) {
+                selectorX += 90;
+                selected += 1;
+        } else if (ke.getKeyCode() == KeyEvent.VK_LEFT && selectorX > 100) {
+                selectorX -= 90;
+                selected -= 1;
         }
 
         // SIMPLY FOR DEBUGGING | COMMENTED OUT = NOT IN USE
