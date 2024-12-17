@@ -1,6 +1,7 @@
 // imports
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Font;
 
 public class Player {
 
@@ -25,6 +26,9 @@ public class Player {
     public boolean hurtAnimal;
     public boolean eating;
     public boolean alive;
+    public boolean hasDagger;
+    public boolean hasAxe;
+    public boolean hasPickaxe;
 
     // constructors
     public Player(int px, int py, int ps, int pdim, Color pc) {
@@ -38,12 +42,16 @@ public class Player {
         wood = 0;
         stone = 0;
         meat = 0;
+        hasDagger = false;
+        hasAxe = false;
+        hasPickaxe = false;
 
         // stats
         food = 40;
         energy = 50;
         hungerLossVar = 0;
 
+        // controlling variables
         startProgressBar = false;
         mWood = false;
         mStone = false;
@@ -112,6 +120,39 @@ public class Player {
             p.setColor(Color.RED);
             p.drawString("You Died!", (sWidth / 2) - (p.getFontMetrics().stringWidth("You Died!") / 2), 200);
             alive = false;
+        }
+    }
+
+    // inventory
+    public void drawInventory(Graphics p, int selectorX, int selectorY, int screenW, Color darkerMaroon, Font smallerText, Font biggerText) {
+        p.fillRect(0, 375, screenW, 100);
+        p.setColor(Color.WHITE);
+        p.setFont(biggerText);
+        p.drawString("Wood: " + Integer.toString(wood), 0, 400);
+        p.drawString("Stone: " + Integer.toString(stone), 0, 425);
+        p.drawString("Meat: " + Integer.toString(meat), 0, 450);
+        p.drawString(Integer.toString(food) + " :Hunger", 375, 400);
+        p.drawString(Integer.toString(energy) + " :Energy", 375, 425);
+        // draw hot bar
+        p.setColor(darkerMaroon);
+        p.fillRect(100, 380, 85, 75);
+        p.fillRect(190, 380, 85, 75);
+        p.fillRect(280, 380, 85, 75);
+        // draw selector
+        p.setColor(Color.WHITE);
+        p.drawRect(selectorX, selectorY, 85, 75);
+        // draw items
+        p.setFont(smallerText);
+        p.setColor(Color.RED);
+        p.drawString("Dagger", 115, 420);
+        p.drawString("Axe", 220, 420);
+        p.drawString("Pickaxe", 295, 420);
+    }
+
+    // info boxes
+    public void drawInfoBox(Graphics p, int sel) {
+        if (sel == 1) {
+
         }
     }
 

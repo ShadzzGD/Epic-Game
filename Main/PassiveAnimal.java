@@ -64,22 +64,24 @@ public class PassiveAnimal {
 
     // check if the player is close to the animal
     public void checkForInteraction(Player p) {
-        // top
-        if (p.x == x && p.y == (y - dim)) {
-            p.startProgressBar = true;
-            p.hurtAnimal = true;
-        // left
-        } else if (p.x == (x - dim) && p.y == y) {
-            p.startProgressBar = true;
-            p.hurtAnimal = true;
-        // bottom
-        } else if (p.x == x && p.y == (y + dim)) {
-            p.startProgressBar = true;
-            p.hurtAnimal = true;
-        // right
-        } else if (p.x == (x + dim) && p.y == y) {
-            p.startProgressBar = true;
-            p.hurtAnimal = true;
+        if (p.hasDagger == true) {
+            // top
+            if (p.x == x && p.y == (y - dim)) {
+                p.startProgressBar = true;
+                p.hurtAnimal = true;
+            // left
+            } else if (p.x == (x - dim) && p.y == y) {
+                p.startProgressBar = true;
+                p.hurtAnimal = true;
+            // bottom
+            } else if (p.x == x && p.y == (y + dim)) {
+                p.startProgressBar = true;
+                p.hurtAnimal = true;
+            // right
+            } else if (p.x == (x + dim) && p.y == y) {
+                p.startProgressBar = true;
+                p.hurtAnimal = true;
+            }
         }
     }
 

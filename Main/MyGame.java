@@ -25,6 +25,8 @@ public class MyGame extends Game  {
         Color darkerMaroon;
         Color brown;
         Random random;
+        Font smallerText;
+        Font biggerText;
 
         // integers
         int pWidth;
@@ -37,6 +39,10 @@ public class MyGame extends Game  {
 	public MyGame() {
                 // initialize variables
                 // classes
+                // font
+                smallerText = new Font("Arial", 1, 15);
+                biggerText = new Font("Arial", 1, 20);
+
                 // random
                 random = new Random();
 
@@ -96,9 +102,17 @@ public class MyGame extends Game  {
                                 canInteract = true;
                                 pWidth = 0;
                                 if (p.mWood == true) {
-                                        p.wood += 1;
+                                        if (p.hasAxe == true) {
+                                                p.wood += 3;
+                                        } else {
+                                                p.wood += 1;
+                                        }
                                 } else if (p.mStone == true) {
-                                        p.stone += 1;
+                                        if (p.hasPickaxe == true) {
+                                                p.stone += 2;
+                                        } else {
+                                                p.stone += 1;
+                                        }
                                 } else if (p.hurtAnimal == true) {
                                         pa.anotherWidthVar -= 15;
                                 } else if (p.eating == true) {
@@ -182,25 +196,7 @@ public class MyGame extends Game  {
 
                 // draw inventory
                 pen.setColor(maroon);
-                pen.fillRect(0, 375, SCREEN_WIDTH, 100);
-                pen.setFont(new Font("Arial", 1, 20));
-                pen.setColor(Color.WHITE);
-                pen.drawString("Wood: " + Integer.toString(p.wood), 0, 400);
-                pen.drawString("Stone: " + Integer.toString(p.stone), 0, 425);
-                pen.drawString("Meat: " + Integer.toString(p.meat), 0, 450);
-                pen.drawString(Integer.toString(p.food) + " :Hunger", 375, 400);
-                pen.drawString(Integer.toString(p.energy) + " :Energy", 375, 425);
-                // draw hot bar
-                pen.setColor(darkerMaroon);
-                pen.fillRect(100, 380, 85, 75);
-                pen.fillRect(190, 380, 85, 75);
-                pen.fillRect(280, 380, 85, 75);
-                // draw selector
-                pen.setColor(Color.WHITE);
-                pen.drawRect(selectorX, selectorY, 85, 75);
-                // draw items
-                pen.setFont(new Font("Arial", 1, 15));
-                pen.drawString("Dagger", 115, 420);
+                p.drawInventory(pen, selectorX, selectorY, SCREEN_WIDTH, darkerMaroon, smallerText, biggerText);
         }
         
     @Override
